@@ -21,7 +21,7 @@ setup(
     url='https://github.com/gonrin/gatco-oauthlib/',
     author='cuongnc.coder and contributors',
     author_email='cuongnc.coder@gmail.com',
-    license='MIT',
+    license='BSD',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
