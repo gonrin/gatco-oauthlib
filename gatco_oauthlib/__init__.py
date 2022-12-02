@@ -12,7 +12,7 @@
     :license: BSD, see LICENSE for more details.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0.dev0"
 __author__ = "CuongNC <cuongnc.coder@gmail.com>"
 __homepage__ = 'https://github.com/gonrin/gatco-oauthlib'
 __license__ = 'BSD'

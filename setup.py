@@ -12,7 +12,6 @@ VERSION = re.search(
     open(path.join(ROOT_DIR, 'gatco_oauthlib', '__init__.py')).read()
 ).group(1)
 
-
 setup(
     name='Gatco-OAuthlib',
     version=VERSION,
