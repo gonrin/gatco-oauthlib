@@ -346,6 +346,7 @@ class OAuthRemoteApp(object):
         content_type=None,
         app_key=None,
         encoding='utf-8',
+        server_name=None
     ):
         self.oauth = oauth
         self.name = name
@@ -354,6 +355,7 @@ class OAuthRemoteApp(object):
         self._request_token_url = request_token_url
         self._access_token_url = access_token_url
         self._authorize_url = authorize_url
+        self._server_name = server_name
         self._consumer_key = consumer_key
         self._consumer_secret = consumer_secret
         self._rsa_key = rsa_key
@@ -758,7 +760,11 @@ class OAuthRemoteApp(object):
         redirect_uri = request['session'].get('%s_oauthredir' % self.name)
         print("handle_oauth2_response", self.access_token_url, redirect_uri)
         if redirect_uri is None:
-            redirect_uri = urljoin(request.url, "/oauth/authorized")
+            # redirect_uri = urljoin(request.url, "/oauth/authorized")
+            if self._server_name is not None:
+                redirect_uri = urljoin(self._server_name, "/oauth/authorized")
+            else:
+                redirect_uri = urljoin('https://' + request.host, "/oauth/authorized")
         remote_args = {
             'code': args.get('code'),
             'client_secret': self.consumer_secret,
