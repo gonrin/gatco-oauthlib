@@ -754,12 +754,18 @@ class OAuthRemoteApp(object):
         """Handles an oauth2 authorization response."""
 
         client = self.make_client()
-        print("handle_oauth2_response", self.access_token_url)
+        
+        redirect_uri = request['session'].get('%s_oauthredir' % self.name)
+        print("handle_oauth2_response", self.access_token_url, redirect_uri)
+        if redirect_uri is None:
+            redirect_uri = urljoin(request.url, "/oauth/authorized")
         remote_args = {
             'code': args.get('code'),
             'client_secret': self.consumer_secret,
-            'redirect_uri': request['session'].get('%s_oauthredir' % self.name),
+            # 'redirect_uri': request['session'].get('%s_oauthredir' % self.name),
+            'redirect_uri': redirect_uri
         }
+        print('Prepare oauth2 remote args %r', remote_args)
         log.debug('Prepare oauth2 remote args %r', remote_args)
         remote_args.update(self.access_token_params)
         headers = copy(self._access_token_headers)
